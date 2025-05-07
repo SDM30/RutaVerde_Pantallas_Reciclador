@@ -18,9 +18,16 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.simon.proyectorutaverde.navegation.routes.Screen
+import com.simon.proyectorutaverde.navegation.routes.Screen.AfMaterialesScreen
+import com.simon.proyectorutaverde.navegation.routes.Screen.AfSolicitudListScreen
 import com.simon.proyectorutaverde.navegation.routes.Screen.MaterialesScreen
 import com.simon.proyectorutaverde.navegation.routes.Screen.ProductorChatScreen
+import com.simon.proyectorutaverde.navegation.routes.Screen.SolicitudScreen
+import com.simon.proyectorutaverde.screens.AfChatScreen
+import com.simon.proyectorutaverde.screens.AfMaterialesScreen
+import com.simon.proyectorutaverde.screens.AfSolicitudListScreen
 import com.simon.proyectorutaverde.screens.MaterialesScreen
+import com.simon.proyectorutaverde.screens.ModoAfiliadoScreen
 import com.simon.proyectorutaverde.screens.ProductorChatScreen
 import com.simon.proyectorutaverde.screens.RecicladorMainScreen
 import com.simon.proyectorutaverde.screens.RutasScreen
@@ -53,13 +60,14 @@ fun AppNavHost(navController: NavHostController) {
     ) {
         composable(Screen.RecicladorMainScreen.route) {
             RecicladorMainScreen(
-                onSolicitudClick = { navController.navigate(Screen.SolicitudScreen.route) }
+                onSolicitudClick = { navController.navigate(Screen.SolicitudScreen.route) },
+                onModoAfiliadoClick = { navController.navigate(Screen.ModoAfiliadoScreen.route) }
             )
         }
 
         composable(Screen.SolicitudScreen.route) {
             SolicitudScreen(
-                onBackClick = { Screen.RecicladorMainScreen.route },
+                onBackClick = { navController.navigate(Screen.RecicladorMainScreen.route) },
                 onAccept = {},
                 onReject = {},
                 onNavigateToSolicitud = { navController.navigate(Screen.SolicitudScreen.route) },
@@ -93,6 +101,41 @@ fun AppNavHost(navController: NavHostController) {
                 onNavigateToMateriales = { navController.navigate(Screen.MaterialesScreen.route) },
                 onNavigateToRutas = { navController.navigate(Screen.RutasScreen.route) },
                 onNavigateToProductorChat = { navController.navigate(Screen.ProductorChatScreen.route) }
+            )
+        }
+
+        composable(Screen.ModoAfiliadoScreen.route) {
+            ModoAfiliadoScreen(
+                onExitClick = { navController.navigate(Screen.RecicladorMainScreen.route) },
+                onRouteClick = { navController.navigate(Screen.AfSolicitudListScreen.route) }
+            )
+        }
+
+        composable(Screen.AfSolicitudListScreen.route) {
+            AfSolicitudListScreen(
+                currentRoute = Screen.AfSolicitudListScreen.route,
+                onNavigateToSolicitud = { navController.navigate(Screen.AfSolicitudListScreen.route) },
+                onNavigateToMateriales = { navController.navigate(Screen.AfMaterialesScreen.route)} ,
+                onNavigateToProductorChat= { navController.navigate(Screen.AfChatScreen.route) }
+            )
+        }
+
+        composable (AfMaterialesScreen.route) {
+            AfMaterialesScreen(
+                currentRoute = Screen.AfMaterialesScreen.route,
+                onNavigateToSolicitud = { navController.navigate(Screen.AfSolicitudListScreen.route) },
+                onNavigateToMateriales = { navController.navigate(Screen.MaterialesScreen.route) },
+                onNavigateToProductorChat = { navController.navigate(Screen.AfChatScreen.route) },
+                30
+            )
+        }
+
+        composable (Screen.AfChatScreen.route){
+            AfChatScreen(
+                currentRoute = Screen.AfChatScreen.route,
+                onNavigateToSolicitud = { navController.navigate(Screen.AfSolicitudListScreen.route) },
+                onNavigateToMateriales = { navController.navigate(Screen.AfMaterialesScreen.route) },
+                onNavigateToProductorChat = { navController.navigate(Screen.AfChatScreen.route)  }
             )
         }
 

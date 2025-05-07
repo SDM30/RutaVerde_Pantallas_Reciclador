@@ -6,4 +6,8 @@ sealed class Screen(val route: String) {
     object MaterialesScreen: Screen("MaterialesScreen")
     object RutasScreen: Screen("RutasScreen")
     object ProductorChatScreen: Screen("ProductorChatScreen")
+    object ModoAfiliadoScreen: Screen("ModoAfiliadoScreen")
+    object AfMaterialesScreen: Screen("AfMaterialesScreen")
+    object AfSolicitudListScreen: Screen("AfSolicitudListScreen")
+    object AfChatScreen: Screen("AfChatScreen")
 }
