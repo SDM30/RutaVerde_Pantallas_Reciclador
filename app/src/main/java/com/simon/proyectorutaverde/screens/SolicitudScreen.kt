@@ -38,6 +38,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
@@ -93,21 +95,30 @@ fun SolicitudScreen(
             // Request Details Section
             Text("Detalles de la solicitud", style = MaterialTheme.typography.titleMedium)
             Spacer(Modifier.height(8.dp))
-            RequestDetailItem("Pago estimado", "###")
+            RequestDetailItem("Propina", "###")
             RequestDetailItem("Duración de entrega", "###")
             RequestDetailItem("Distancia promedio", "###")
 
             Divider(modifier = Modifier.padding(vertical = 16.dp))
 
-            // Materials Section
-            Text("Materiales disponibles", style = MaterialTheme.typography.titleMedium)
-            Spacer(Modifier.height(8.dp))
-            MaterialListItem(
-                name = "Papel",
-                description = "Hojas de cuaderno, impresiones",
-                weight = "1.5 kg",
-            )
+            // Instrucciones de recogida
+            Spacer(Modifier.height(12.dp))
+            Text("Instrucciones de recogida", style = MaterialTheme.typography.titleMedium)
+            Spacer(Modifier.height(4.dp))
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.secondaryContainer
+                )
+            ) {
+                Text(
+                    "Timbrar al 201",
+                    style = MaterialTheme.typography.bodyLarge,
+                    modifier = Modifier.padding(16.dp)
+                )
+            }
 
+            Divider(modifier = Modifier.padding(vertical = 16.dp))
             // Action Buttons
             Row(
                 modifier = Modifier

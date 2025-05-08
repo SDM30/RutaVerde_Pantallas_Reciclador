@@ -18,6 +18,7 @@ import com.simon.proyectorutaverde.navegation.routes.Screen
 @Composable
 fun AfDetailSolicitudScreen(
     currentRoute: String,
+    solicitudId: Int,
     onBackClick: () -> Unit = {},
     onAccept: () -> Unit = {},
     onReject: () -> Unit = {},
@@ -28,7 +29,7 @@ fun AfDetailSolicitudScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Solicitud de recolección") },
+                title = { Text("Solicitud #$solicitudId") },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
                         Icon(Icons.Filled.ArrowBack, contentDescription = "Volver")
@@ -58,23 +59,32 @@ fun AfDetailSolicitudScreen(
                     Text("Nombre Usuario", style = MaterialTheme.typography.titleMedium)
                 },
                 supportingContent = {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(6.dp)
+                    Column(
+                        horizontalAlignment = Alignment.Start
                     ) {
-                        repeat(5) {
-                            Icon(
-                                imageVector = Icons.Filled.Star,
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.secondary,
-                                modifier = Modifier.size(18.dp)
-                            )
+                        // Calificación con estrellas
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(2.dp),
+                            modifier = Modifier.padding(vertical = 4.dp)
+                        ) {
+                            repeat(5) {
+                                Icon(
+                                    imageVector = Icons.Filled.Star,
+                                    contentDescription = null,
+                                    tint = MaterialTheme.colorScheme.secondary,
+                                    modifier = Modifier.size(18.dp)
+                                )
+                            }
                         }
+
+                        // Botón de mensaje debajo de la calificación
                         TextButton(
                             onClick = { /* mensaje */ },
                             colors = ButtonDefaults.textButtonColors(
                                 containerColor = MaterialTheme.colorScheme.secondaryContainer
-                            )
+                            ),
+                            modifier = Modifier.padding(top = 4.dp)
                         ) {
                             Text("Enviar Mensaje")
                         }
@@ -95,8 +105,26 @@ fun AfDetailSolicitudScreen(
             // — Request Details —
             Text("Detalles de la solicitud", style = MaterialTheme.typography.titleMedium)
             Spacer(Modifier.height(8.dp))
-            RequestDetailItem("Duración de entrega", "@@@")
-            RequestDetailItem("Distancia promedio", "@@@")
+            RequestDetailItem("ID de Solicitud", "#$solicitudId")
+            RequestDetailItem("Duración de entrega", "30 minutos")
+            RequestDetailItem("Distancia promedio", "3.5 km")
+
+            // Instrucciones de recogida
+            Spacer(Modifier.height(12.dp))
+            Text("Instrucciones de recogida", style = MaterialTheme.typography.titleMedium)
+            Spacer(Modifier.height(4.dp))
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.secondaryContainer
+                )
+            ) {
+                Text(
+                    "Timbrar al 201",
+                    style = MaterialTheme.typography.bodyLarge,
+                    modifier = Modifier.padding(16.dp)
+                )
+            }
 
             Divider(modifier = Modifier.padding(vertical = 16.dp))
 

@@ -5,10 +5,11 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ContactPage
-import androidx.compose.material.icons.filled.Description
 import androidx.compose.material.icons.filled.NavigateNext
 import androidx.compose.material3.Divider
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -17,17 +18,38 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import com.simon.proyectorutaverde.navegation.routes.Screen
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AfSolicitudListScreen(
     currentRoute: String,
     onNavigateToSolicitud: () -> Unit,
     onNavigateToMateriales: () -> Unit,
-    onNavigateToProductorChat: () -> Unit
+    onNavigateToProductorChat: () -> Unit,
+    onItemClick: (Int) -> Unit,
+    onBackClick: () -> Unit
 ) {
     Scaffold(
         bottomBar = {
+            TopAppBar(
+                title = { Text(text = "# de paradas = X") },
+                navigationIcon = {
+                    IconButton(onClick = onBackClick) {
+                        Icon(
+                            imageVector = Icons.Filled.ArrowBack,
+                            contentDescription = "Volver"
+                        )
+                    }
+                },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.surface
+                )
+            )
+
             AfBottomBar(
                 currentRoute = currentRoute,
                 onNavigateToSolicitud = onNavigateToSolicitud,
@@ -46,7 +68,7 @@ fun AfSolicitudListScreen(
             items(List(10) { it + 1 }) { index ->
                 SolicitudListItem(
                     solicitudNumber = index,
-                    onClick = onNavigateToSolicitud
+                    onClick = { onItemClick(index) }
                 )
                 Divider()
             }
