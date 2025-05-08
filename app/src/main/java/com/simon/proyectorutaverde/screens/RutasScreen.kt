@@ -1,20 +1,7 @@
 package com.simon.proyectorutaverde.screens
 
 import androidx.compose.foundation.Image
-
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
-import com.simon.proyectorutaverde.R
-import com.simon.proyectorutaverde.navegation.routes.Screen
-import com.simon.proyectorutaverde.ui.theme.ProyectoRutaVerdeTheme
-
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -22,13 +9,16 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Route
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.rememberModalBottomSheetState
-import androidx.compose.material3.FloatingActionButton
-
-
+import com.simon.proyectorutaverde.R
+import com.simon.proyectorutaverde.navegation.routes.Screen
+import com.simon.proyectorutaverde.ui.theme.ProyectoRutaVerdeTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -48,9 +38,9 @@ fun RutasScreen(
         ) {
             RouteDetailsSheet(routes = listOf(
                 Route("Ruta #1", "43 min", "3.1 km"),
-                Route("Ruta #2", "43 min", "3.2 km"),
-                Route("Ruta #3", "43 min", "3.2 km"),
-                Route("Ruta #4", "43 min", "3.2 km")
+                Route("Ruta #2", "37 min", "2.8 km"),
+                Route("Ruta #3", "50 min", "4.2 km"),
+                Route("Ruta #4", "29 min", "1.7 km")
             ))
         }
     }
@@ -94,7 +84,6 @@ fun RutasScreen(
     }
 }
 
-
 @Composable
 fun RouteDetailsSheet(routes: List<Route>) {
     Column(
@@ -136,6 +125,24 @@ fun RouteItem(route: Route) {
         ) {
             Text("Tiempo: ${route.time}", style = MaterialTheme.typography.bodyMedium)
             Text("Distancia: ${route.distance}", style = MaterialTheme.typography.bodyMedium)
+        }
+        Spacer(modifier = Modifier.height(8.dp))
+        // Altimetría o descripción plana
+        if (route.name == "Ruta #1") {
+            Image(
+                painter = painterResource(id = R.drawable.ruta_altitud),
+                contentDescription = "Perfil de altitud",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(100.dp),
+                contentScale = ContentScale.FillWidth
+            )
+        } else {
+            Text(
+                text = "Principalmente llano",
+                style = MaterialTheme.typography.bodySmall,
+                modifier = Modifier.padding(vertical = 4.dp)
+            )
         }
     }
 }

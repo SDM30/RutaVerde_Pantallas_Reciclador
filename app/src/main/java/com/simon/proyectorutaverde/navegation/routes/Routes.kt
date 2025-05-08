@@ -10,4 +10,5 @@ sealed class Screen(val route: String) {
     object AfMaterialesScreen: Screen("AfMaterialesScreen")
     object AfSolicitudListScreen: Screen("AfSolicitudListScreen")
     object AfChatScreen: Screen("AfChatScreen")
+    object RecicladorProfileScreen: Screen("RecicladorProfileScreen")
 }

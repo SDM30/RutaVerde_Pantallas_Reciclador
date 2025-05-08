@@ -30,6 +30,7 @@ import com.simon.proyectorutaverde.screens.MaterialesScreen
 import com.simon.proyectorutaverde.screens.ModoAfiliadoScreen
 import com.simon.proyectorutaverde.screens.ProductorChatScreen
 import com.simon.proyectorutaverde.screens.RecicladorMainScreen
+import com.simon.proyectorutaverde.screens.RecicladorProfileScreen
 import com.simon.proyectorutaverde.screens.RutasScreen
 import com.simon.proyectorutaverde.screens.SolicitudScreen
 import com.simon.proyectorutaverde.ui.theme.ProyectoRutaVerdeTheme
@@ -60,71 +61,73 @@ fun AppNavHost(navController: NavHostController) {
     ) {
         composable(Screen.RecicladorMainScreen.route) {
             RecicladorMainScreen(
-                onSolicitudClick = { navController.navigate(Screen.SolicitudScreen.route) },
-                onModoAfiliadoClick = { navController.navigate(Screen.ModoAfiliadoScreen.route) }
+                onSolicitudClick = { navController.navigate(SolicitudScreen.route) },
+                onModoAfiliadoClick = { navController.navigate(Screen.ModoAfiliadoScreen.route) },
+                onUserProfClick = { navController.navigate(Screen.RecicladorProfileScreen.route) }
             )
         }
 
-        composable(Screen.SolicitudScreen.route) {
+        composable(SolicitudScreen.route) {
             SolicitudScreen(
                 onBackClick = { navController.navigate(Screen.RecicladorMainScreen.route) },
                 onAccept = {},
                 onReject = {},
-                onNavigateToSolicitud = { navController.navigate(Screen.SolicitudScreen.route) },
-                onNavigateToMateriales = { navController.navigate(Screen.MaterialesScreen.route) },
+                onNavigateToSolicitud = { navController.navigate(SolicitudScreen.route) },
+                onNavigateToMateriales = { navController.navigate(MaterialesScreen.route) },
                 onNavigateToRutas = { navController.navigate(Screen.RutasScreen.route) },
-                onNavigateToProductorChat = { navController.navigate(Screen.ProductorChatScreen.route) }
+                onNavigateToProductorChat = { navController.navigate(ProductorChatScreen.route) }
             )
         }
 
-        composable(Screen.MaterialesScreen.route) {
+        composable(MaterialesScreen.route) {
             MaterialesScreen(
-                onNavigateToSolicitud = { navController.navigate(Screen.SolicitudScreen.route) },
-                onNavigateToMateriales = { navController.navigate(Screen.MaterialesScreen.route) },
+                onNavigateToSolicitud = { navController.navigate(SolicitudScreen.route) },
+                onNavigateToMateriales = { navController.navigate(MaterialesScreen.route) },
                 onNavigateToRutas = { navController.navigate(Screen.RutasScreen.route) },
-                onNavigateToProductorChat = { navController.navigate(Screen.ProductorChatScreen.route) }
+                onNavigateToProductorChat = { navController.navigate(ProductorChatScreen.route) }
             )
         }
 
         composable(Screen.RutasScreen.route) {
             RutasScreen(
-                onNavigateToSolicitud = { navController.navigate(Screen.SolicitudScreen.route) },
-                onNavigateToMateriales = { navController.navigate(Screen.MaterialesScreen.route) },
+                onNavigateToSolicitud = { navController.navigate(SolicitudScreen.route) },
+                onNavigateToMateriales = { navController.navigate(MaterialesScreen.route) },
                 onNavigateToRutas = { navController.navigate(Screen.RutasScreen.route) },
-                onNavigateToProductorChat = { navController.navigate(Screen.ProductorChatScreen.route) }
+                onNavigateToProductorChat = { navController.navigate(ProductorChatScreen.route) }
             )
         }
 
-        composable(Screen.ProductorChatScreen.route) {
+        composable(ProductorChatScreen.route) {
             ProductorChatScreen(
-                onNavigateToSolicitud = { navController.navigate(Screen.SolicitudScreen.route) },
-                onNavigateToMateriales = { navController.navigate(Screen.MaterialesScreen.route) },
+                onNavigateToSolicitud = { navController.navigate(SolicitudScreen.route) },
+                onNavigateToMateriales = { navController.navigate(MaterialesScreen.route) },
                 onNavigateToRutas = { navController.navigate(Screen.RutasScreen.route) },
-                onNavigateToProductorChat = { navController.navigate(Screen.ProductorChatScreen.route) }
+                onNavigateToProductorChat = { navController.navigate(ProductorChatScreen.route) }
             )
         }
 
         composable(Screen.ModoAfiliadoScreen.route) {
             ModoAfiliadoScreen(
                 onExitClick = { navController.navigate(Screen.RecicladorMainScreen.route) },
-                onRouteClick = { navController.navigate(Screen.AfSolicitudListScreen.route) }
+                onRouteClick = { navController.navigate(AfSolicitudListScreen.route) },
+                onUserProfClick = { navController.navigate(Screen.RecicladorProfileScreen.route) }
             )
         }
 
-        composable(Screen.AfSolicitudListScreen.route) {
+        composable(AfSolicitudListScreen.route) {
             AfSolicitudListScreen(
-                currentRoute = Screen.AfSolicitudListScreen.route,
-                onNavigateToSolicitud = { navController.navigate(Screen.AfSolicitudListScreen.route) },
-                onNavigateToMateriales = { navController.navigate(Screen.AfMaterialesScreen.route)} ,
+                currentRoute = AfSolicitudListScreen.route,
+                onNavigateToSolicitud = { navController.navigate(AfSolicitudListScreen.route) },
+                onNavigateToMateriales = { navController.navigate(AfMaterialesScreen.route)} ,
                 onNavigateToProductorChat= { navController.navigate(Screen.AfChatScreen.route) }
             )
         }
 
         composable (AfMaterialesScreen.route) {
             AfMaterialesScreen(
-                currentRoute = Screen.AfMaterialesScreen.route,
-                onNavigateToSolicitud = { navController.navigate(Screen.AfSolicitudListScreen.route) },
-                onNavigateToMateriales = { navController.navigate(Screen.MaterialesScreen.route) },
+                currentRoute = AfMaterialesScreen.route,
+                onNavigateToSolicitud = { navController.navigate(AfSolicitudListScreen.route) },
+                onNavigateToMateriales = { navController.navigate(MaterialesScreen.route) },
                 onNavigateToProductorChat = { navController.navigate(Screen.AfChatScreen.route) },
                 30
             )
@@ -133,9 +136,20 @@ fun AppNavHost(navController: NavHostController) {
         composable (Screen.AfChatScreen.route){
             AfChatScreen(
                 currentRoute = Screen.AfChatScreen.route,
-                onNavigateToSolicitud = { navController.navigate(Screen.AfSolicitudListScreen.route) },
-                onNavigateToMateriales = { navController.navigate(Screen.AfMaterialesScreen.route) },
+                onNavigateToSolicitud = { navController.navigate(AfSolicitudListScreen.route) },
+                onNavigateToMateriales = { navController.navigate(AfMaterialesScreen.route) },
                 onNavigateToProductorChat = { navController.navigate(Screen.AfChatScreen.route)  }
+            )
+        }
+
+        composable (Screen.RecicladorProfileScreen.route) {
+            RecicladorProfileScreen(
+                name = "Juan Pérez",
+                rating = 5F,
+                onEditInfo = {},
+                onContactOperator = {},
+                onEnterAffiliation = {},
+                onBackClick = { navController.popBackStack() }
             )
         }
 
