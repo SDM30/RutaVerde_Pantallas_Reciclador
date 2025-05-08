@@ -127,7 +127,7 @@ fun AppNavHost(navController: NavHostController) {
                     // Usamos la función createRoute para construir la ruta con el ID
                     navController.navigate(Screen.AfDetailSolicitudScreen.createRoute(solicitudId))
                 },
-                onBackClick = { navController.popBackStack() }
+                onBackClick = { navController.navigate(Screen.ModoAfiliadoScreen.route) }
             )
         }
 

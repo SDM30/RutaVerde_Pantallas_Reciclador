@@ -34,9 +34,9 @@ fun AfSolicitudListScreen(
     onBackClick: () -> Unit
 ) {
     Scaffold(
-        bottomBar = {
+        topBar = {
             TopAppBar(
-                title = { Text(text = "# de paradas = X") },
+                title = { Text(text = "Ruta de Solicitudes") },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
                         Icon(
@@ -49,7 +49,8 @@ fun AfSolicitudListScreen(
                     containerColor = MaterialTheme.colorScheme.surface
                 )
             )
-
+        },
+        bottomBar = {
             AfBottomBar(
                 currentRoute = currentRoute,
                 onNavigateToSolicitud = onNavigateToSolicitud,
